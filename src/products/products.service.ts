@@ -20,11 +20,13 @@ export class ProductsService {
         })
     }
 
-    async create({name, quantity}:CreateProductDto){
+    async create({name, quantity, price, img}:CreateProductDto){
         return await this.prismaService.product.create({
             data: {
                 name,
-                quantity
+                quantity,
+                price,
+                img,
             }
         })
     }

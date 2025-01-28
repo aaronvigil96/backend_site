@@ -13,9 +13,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id Int @id @default(autoincrement())
+  email String @unique
+  password String
+}
 
 model Product {
   id Int @id @default(autoincrement())
   name String
+  price Int
   quantity Int @default(0)
+  img String @default("azucar.png")
+  isActive Boolean @default(true)
 }

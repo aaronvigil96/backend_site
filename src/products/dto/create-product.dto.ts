@@ -6,4 +6,9 @@ export class CreateProductDto {
     @IsNumber()
     @IsPositive()
     quantity: number;
+    @IsNumber()
+    @IsPositive()
+    price: number;
+    @IsString()
+    img: string;
 }

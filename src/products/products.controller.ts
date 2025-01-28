@@ -1,7 +1,8 @@
-import { Body, Controller, Get, HttpCode, Param, ParseIntPipe, Post } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
 import { ProductsService } from "./products.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { SkipThrottle } from "@nestjs/throttler";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller('products')
 export class ProductsController {
@@ -20,6 +21,7 @@ export class ProductsController {
     }
 
     @Post()
+    @UseGuards(AuthGuard())
     create(@Body() createProductDto:CreateProductDto){
         return this.productsService.create(createProductDto);
     }
