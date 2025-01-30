@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, Param, ParseIntPipe, Patch, Post, UseGuards } from "@nestjs/common";
 import { ProductsService } from "./products.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { SkipThrottle } from "@nestjs/throttler";
@@ -24,5 +24,11 @@ export class ProductsController {
     @UseGuards(AuthGuard())
     create(@Body() createProductDto:CreateProductDto){
         return this.productsService.create(createProductDto);
+    }
+
+    @Patch(':id')
+    @UseGuards(AuthGuard())
+    update(@Param('id', ParseIntPipe) id: number, @Body() createProductDto:CreateProductDto){
+        return this.productsService.update(id, createProductDto);
     }
 }

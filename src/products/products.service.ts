@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 
@@ -29,5 +29,20 @@ export class ProductsService {
                 img,
             }
         })
+    }
+
+    async update(id: number, createProductDto:CreateProductDto){
+        try{
+            return await this.prismaService.product.update({
+                where: {
+                    id
+                },
+                data: {
+                    ...createProductDto
+                }
+            })
+        }catch(err){
+            throw new NotFoundException()
+        }
     }
 }

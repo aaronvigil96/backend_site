@@ -2,13 +2,13 @@ import { IsNumber, IsPositive, IsString } from "class-validator";
 
 export class CreateProductDto {
     @IsString()
-    name: string;
+    name?: string;
     @IsNumber()
     @IsPositive()
-    quantity: number;
+    quantity?: number;
     @IsNumber()
     @IsPositive()
-    price: number;
+    price?: number;
     @IsString()
-    img: string;
+    img?: string;
 }
