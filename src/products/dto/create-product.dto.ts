@@ -11,4 +11,6 @@ export class CreateProductDto {
     price?: number;
     @IsString()
     img?: string;
+    @IsNumber()
+    categoryId:number;
 }

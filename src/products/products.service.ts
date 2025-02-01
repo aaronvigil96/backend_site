@@ -8,25 +8,30 @@ export class ProductsService {
     constructor(private readonly prismaService:PrismaService){}
     
     async getAll() {
-        const products = await this.prismaService.product.findMany({});
-        return products;
+        return await this.prismaService.product.findMany({
+            where: {
+                isActive: true
+            }
+        });
     }
 
     async getById(id: number){
         return await this.prismaService.product.findUnique({
             where: {
-                id
+                id,
+                isActive: true
             }
         })
     }
 
-    async create({name, quantity, price, img}:CreateProductDto){
+    async create({name, quantity, price, img, categoryId}:CreateProductDto){
         return await this.prismaService.product.create({
             data: {
                 name,
                 quantity,
                 price,
                 img,
+                categoryId
             }
         })
     }
