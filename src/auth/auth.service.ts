@@ -28,7 +28,7 @@ export class AuthService {
                 }
             });
             return {
-                token: this.getJwtToken({id: user.id})
+                token: this.getJwtToken({id: user.id, role: user.role})
             }
         }catch(err){
             throw new NotFoundException('Algo salió mal')
@@ -45,7 +45,7 @@ export class AuthService {
             });
             if(!bcrypt.compareSync(password, user.password)) throw new BadRequestException('Email o contraseña incorrecta');
             return {
-                token: this.getJwtToken({id: user.id})
+                token: this.getJwtToken({id: user.id, role: user.role})
             }
         }catch(err){
             throw new NotFoundException('Algo salió mal');

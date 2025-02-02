@@ -3,6 +3,7 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import { AuthService } from "./auth.service";
 import { Auth } from "./decorators/auth.decorator";
 import { ValidRoles } from "./interfaces/valid-roles";
+import { SkipThrottle } from "@nestjs/throttler";
 
 @Controller('auth')
 export class AuthController {
@@ -19,6 +20,7 @@ export class AuthController {
         return this.authService.login(createUserDto);
     }
 
+    @SkipThrottle()
     @Get('users')
     @Auth(ValidRoles.ADMIN)
     getAllUsers(){
