@@ -23,7 +23,8 @@ export class JwtStrategy extends PassportStrategy(Strategy){
             },
             select: {
                 email: true,
-                id: true
+                id: true,
+                role: true
             }
         });
         if(!user) throw new UnauthorizedException('Token are not valid');
